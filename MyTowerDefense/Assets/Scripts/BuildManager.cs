@@ -10,22 +10,34 @@ public class BuildManager : MonoBehaviour
     {
         instance = this; //Singleton
 
-        if(instance != null)
+        if (instance != null)
         {
             return;
         }
     }
 
-    public GameObject standardTurretPrefab;
+    public GameObject firtsTurretPrefab;
+    public GameObject secondTurretPrefab;
 
-    private void Start()
+    private TurretBluePrint turretToBuild;
+
+   public bool CanBuild { get { return turretToBuild != null; } }
+
+    public void SelectTurretToBuild(TurretBluePrint turret)
     {
-        turretToBuild = standardTurretPrefab;
+        turretToBuild = turret;
     }
-    private GameObject turretToBuild;
 
-    public GameObject GetTurretToBuild()
+    public void BuildTurretOn (Node node)
     {
-        return turretToBuild;
+        if(PlayerStats.Money < turretToBuild.cost)
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
+        PlayerStats.Money -= turretToBuild.cost;
+        GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.transform.position, Quaternion.identity);
+        node.turret = turret;
+        Debug.Log("Bild, money left" + PlayerStats.Money);
     }
 }
