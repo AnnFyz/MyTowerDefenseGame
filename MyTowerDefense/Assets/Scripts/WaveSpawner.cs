@@ -46,6 +46,6 @@ public class WaveSpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+        Instantiate(enemyPrefab, new Vector3(spawnPoint.position.x, spawnPoint.position.y,0f), Quaternion.identity);
     }
 }
