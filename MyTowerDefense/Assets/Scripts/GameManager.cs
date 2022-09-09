@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (gameIsOver)
-            return;
+        //if (gameIsOver)
+        //    return;
 
         if(PlayerStats.Lives <= 0)
         {
@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            EndGame();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    EndGame();
+        //}
     }
 
 
