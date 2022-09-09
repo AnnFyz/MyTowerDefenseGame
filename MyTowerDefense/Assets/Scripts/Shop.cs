@@ -6,7 +6,7 @@ public class Shop : MonoBehaviour
 {
     public TurretBluePrint firstTurret;
     public TurretBluePrint secondTurret;
-
+    public TurretBluePrint recourceMachine;
     BuildManager buildManager;
     void Start()
     {
@@ -23,4 +23,8 @@ public class Shop : MonoBehaviour
         buildManager.SelectTurretToBuild(secondTurret);
     }
 
+    public void SelectRecourceMachine()
+    {
+        buildManager.SelectTurretToBuild(recourceMachine);
+    }
 }

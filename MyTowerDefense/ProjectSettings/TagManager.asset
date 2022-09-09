@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Bars
+    uniqueID: 3113459753
+    locked: 0
