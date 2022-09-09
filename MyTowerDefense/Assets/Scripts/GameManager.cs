@@ -28,17 +28,19 @@ public class GameManager : MonoBehaviour
         {
             PauseGame();
         }
-       
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            EndGame();
+        }
     }
 
 
     void EndGame()
     {
+        gameOverUI.SetActive(true);
         gameIsOver = true;
         Time.timeScale = 0;
         Debug.Log("Game Over");
-        Time.timeScale = 0;
-        gameOverUI.SetActive(true);
     }
 
     void PauseGame()
