@@ -17,21 +17,11 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        //if (gameIsOver)
-        //    return;
-
+       
         if(PlayerStats.Lives <= 0)
         {
             EndGame();
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
-        //if (Input.GetKeyDown(KeyCode.M))
-        //{
-        //    EndGame();
-        //}
     }
 
 
@@ -41,17 +31,5 @@ public class GameManager : MonoBehaviour
         gameIsOver = true;
         Time.timeScale = 0;
         Debug.Log("Game Over");
-    }
-
-    void PauseGame()
-    {
-        pauseUI.SetActive(true);
-        Time.timeScale = 0;
-    }
-
-    public void ButtonContinue()
-    {
-        pauseUI.SetActive(false);
-        Time.timeScale = 1;
     }
 }
