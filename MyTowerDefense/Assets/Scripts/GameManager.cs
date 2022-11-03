@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void EndGame()
+    void EndGame() // overrride this for working game over menu
     {
         gameOverUI.SetActive(true);
         gameIsOver = true;

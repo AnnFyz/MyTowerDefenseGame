@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
+    public TMP_Text rounsText;
+    public SceneFader sceneFader;
+    public int mainMenuIndex = 0;
     public GameObject ui;
- 
-    void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Toggle();
-        }
+        rounsText.text = PlayerStats.Rounds.ToString();
     }
 
     public void Toggle()
@@ -28,16 +28,16 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
-
     public void Retry()
     {
         Toggle();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo((SceneManager.GetActiveScene().buildIndex));
     }
 
-    public void Menu()
+    public void GoToMenu()
     {
-        SceneManager.LoadScene(0);
+        Toggle();
+        sceneFader.FadeTo(mainMenuIndex);
     }
 
     public void Quit()

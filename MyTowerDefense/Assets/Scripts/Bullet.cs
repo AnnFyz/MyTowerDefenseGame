@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private Transform target;
-    public int damage = 50;
+    public float damage = 50;
     public float speed = 10f;
     public GameObject impactEffect;
     public void Seek(Transform target)
