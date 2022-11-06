@@ -39,7 +39,7 @@ public class BuildManager : MonoBehaviour
         PlayerStats.Money -= turretToBuild.cost;
         GameObject turret = (GameObject)Instantiate(turretToBuild.prefab, node.transform.position, Quaternion.identity);
         node.turret = turret;
-        GameObject buildEf = Instantiate(buildEffect, node.transform.position, Quaternion.identity);
+        GameObject buildEf = Instantiate(buildEffect, new Vector3(node.transform.position.x, node.transform.position.y, 0f), Quaternion.identity);
         Debug.Log("Bild, money left" + PlayerStats.Money);
         Destroy(buildEf, 5f);
     }

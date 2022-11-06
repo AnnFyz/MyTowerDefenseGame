@@ -6,8 +6,9 @@ public class Bullet : MonoBehaviour
 {
     private Transform target;
     public float damage = 50;
-    public float speed = 10f;
+    public float speed = 1f;
     public GameObject impactEffect;
+    public float explosionRadius = 0f;
     public void Seek(Transform target)
     {
         this.target = target;
@@ -31,25 +32,54 @@ public class Bullet : MonoBehaviour
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-        transform.LookAt(target);
+        //transform.LookAt(target);
+        //transform.rotation = Quaternion.Euler(0f, 0f, target.rotation.z);
+        float rotationZ = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
     }
 
     void HitTarget()
     {
         GameObject effect= Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(effect, 0.5f);
-        Damage();
-        //Destroy(target.gameObject);
-        Destroy(gameObject, 0.5f);
+        Destroy(effect, 5f);
+        //if (explosionRadius > 0f)
+        //{
+        //    Explode();
+        //}
+        //else
+        //{
+            Damage(target);
+        //}
+
+        Destroy(gameObject);
     }
 
-    void Damage()
+    void Explode()
     {
-        Enemy e = target.GetComponent<Enemy>();
-
-        if(e != null)
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
         {
+            if (collider.tag == "Enemy")
+            {
+                Damage(collider.transform);
+            }
+        }
+    }
+
+    void Damage(Transform enemy)
+    {
+        Enemy e = enemy.GetComponent<Enemy>();
+
+        if (e != null)
+        {
+            Debug.Log("WAS HIT");
             e.TakeDamage(damage);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 }

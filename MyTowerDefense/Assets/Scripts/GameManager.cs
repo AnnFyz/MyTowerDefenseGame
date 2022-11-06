@@ -30,6 +30,6 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(true);
         gameIsOver = true;
         Time.timeScale = 0;
-        Debug.Log("Game Over");
+        //Debug.Log("Game Over");
     }
 }

@@ -27,15 +27,11 @@ public class Turret : MonoBehaviour
         if (target == null)
             return;
 
-        Vector3 dir = target.position - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Vector3 newRotation = new Vector3(0, 0, angle);
-        partToRotate.rotation = Quaternion.Euler( newRotation);
-        //Quaternion lookRotation = Quaternion.LookRotation(dir);
-        //Vector3 rotation = lookRotation.eulerAngles;
-        //partToRotate.rotation = Quaternion.Euler(0f, 0f, rotation.z);
+        LockOnTarget();
 
-        if(fireCountdown <= 0f)
+
+
+        if (fireCountdown <= 0f)
         {
             Shoot();
             fireCountdown = 1f / fireRate;
@@ -43,7 +39,15 @@ public class Turret : MonoBehaviour
 
         fireCountdown -= Time.deltaTime;
     }
-
+    void LockOnTarget()
+    {
+        Vector3 dir = target.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Vector3 newRotation = new Vector3(0, 0, angle);
+        partToRotate.rotation = Quaternion.Euler(newRotation);
+        //Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        //partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
     void UpdateTarget()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -63,6 +67,7 @@ public class Turret : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+            //targetEnemy = nearestEnemy.GetComponent<Enemy>();
         }
         else
         {
