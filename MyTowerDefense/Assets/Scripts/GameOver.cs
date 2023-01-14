@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
-    public TMP_Text rounsText;
+    public TMP_Text roundsText;
 
-    private void OnEnable()
+    private void Update()
     {
-        rounsText.text = PlayerStats.Rounds.ToString();
+        roundsText.text = PlayerStats.Rounds.ToString();
     }
 
     public void Retry()
